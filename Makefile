@@ -12,7 +12,7 @@ PKG_RELEASE:=3
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://github.com/aria2/aria2/releases/download/release-$(PKG_VERSION)/
-PKG_HASH:=1e2b7fd08d6af228856e51c07173cfcf987528f1ac97e04c5af4a47642617dfd
+PKG_HASH:=skip
 PKG_INSTALL:=1
 PKG_BUILD_PARALLEL:=1
 
@@ -98,8 +98,7 @@ endef
 
 define Build/Prepare
 	$(call Build/Prepare/Default)
-	mv -f $(DL_DIR)/aria2.conf.zip $(PKG_BUILD_DIR)/
-	unzip $(PKG_BUILD_DIR)/aria2.conf.zip $(PKG_BUILD_DIR)/aria2.conf
+	unzip $(DL_DIR)/aria2.conf -d $(PKG_BUILD_DIR)/
 endef
 
 
@@ -114,7 +113,7 @@ define Package/aria2/install
 	$(INSTALL_CONF) ./files/aria2.conf $(1)/etc/config/aria2
 	
 	$(INSTALL_DIR) $(1)/usr/share/aria2
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/aria2.conf/* $(1)/usr/share/aria2/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/aria2.conf-master/* $(1)/usr/share/aria2/
 endef
 
 $(eval $(call Download,aria2.conf))

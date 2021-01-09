@@ -90,7 +90,7 @@ define Package/aria2/conffiles
 endef
 
 define Download/aria2.conf
-  URL:=https://github.com/P3TERX/aria2.conf/archive/master.zip
+  URL:=https://github.com/P3TERX/aria2.conf/archive
   URL_FILE:=master.zip
   FILE:=aria2.conf
   HASH:=skip

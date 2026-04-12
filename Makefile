@@ -108,6 +108,7 @@ define Build/Prepare
 	$(call Build/Prepare/Default)
 	unzip $(DL_DIR)/aria2.conf -d $(PKG_BUILD_DIR)/
 	sed -i '/rpc-secret/d' $(PKG_BUILD_DIR)/aria2.conf-master/*
+	[ -x $(PKG_BUILD_DIR)/aria2.conf-master/tracker.sh ] && { cd $(PKG_BUILD_DIR)/aria2.conf-master && sh ./tracker.sh >/dev/null 2>&1 }
 endef
 
 define Package/aria2/postinst
